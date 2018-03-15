@@ -1,0 +1,36 @@
+version: "3"
+services:
+  mongo:
+    image: mongo:3.6
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports: 
+      - "27017:27017"
+    volumes: 
+      - "$PWD/data/db:/data/db"
+      - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+    # no --auth is needed here as presence of username and password add this option automatically
+    command: mongod
+
+  proxy-pool-container:
+    build: .
+    ports: 
+      - "9000:9000"
+    depends_on:
+      - "mongo"
+    links:
+      - "mongo:mongo"
+    # network_mode: "host"
+
+  # test:
+  #   image: node:8.9.4-alpine
+  #   depends_on:
+  #     - "mongo"
+  #   links:
+  #     - "mongo:mongo"
+  #   command: 
+  #     # - echo mongo
+  #     # - cat /etc/hosts
+  #     ping mongo
+        
