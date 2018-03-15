@@ -1,0 +1,14 @@
+{
+  "appenders": {
+    "out": { "type": "console"},
+    "api": { "type": "file", "filename": "logs/api_log.log", "maxLogSize": 104800, "backups": 5},
+    "task": { "type": "dateFile", "filename": "logs/task_log.log", "maxLogSize": 104800, "backups": 5},
+    "error": { "type": "file", "filename": "logs/error_log.log"}
+  },
+  "categories": {
+    "default": { "appenders": ["out"], "level": "info" },
+    "task": { "appenders": ["task"], "level": "info"},
+    "error": { "appenders": ["error"], "level": "error" },
+    "api": { "appenders": ["api"], "level": "info" }
+  }
+}
