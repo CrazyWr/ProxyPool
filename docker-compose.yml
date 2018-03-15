@@ -2,6 +2,7 @@ version: "3"
 services:
   mongo:
     image: mongo:3.6
+    restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
@@ -21,16 +22,4 @@ services:
       - "mongo"
     links:
       - "mongo:mongo"
-    # network_mode: "host"
-
-  # test:
-  #   image: node:8.9.4-alpine
-  #   depends_on:
-  #     - "mongo"
-  #   links:
-  #     - "mongo:mongo"
-  #   command: 
-  #     # - echo mongo
-  #     # - cat /etc/hosts
-  #     ping mongo
-        
+    restart: always
